@@ -1,6 +1,11 @@
+import Card from "../components/shared/Card"
+
 function AboutPage() {
   return (
-    <div>AboutPage</div>
+    <Card>
+      <h1>About page</h1>  
+      <p>This is app to send feedback about product</p>
+    </Card>
   )
 }
 

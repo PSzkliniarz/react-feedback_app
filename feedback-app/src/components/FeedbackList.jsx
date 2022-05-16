@@ -6,7 +6,6 @@ import FeedbackItem from "./FeedbackItem"
 function FeedbackList() {
     const {feedback} = useContext(FeedbackContext) 
 
-    console.log(feedback);
     if (!feedback || feedback.lengh === 0){
         return <p>No Feedback Yet</p>
     }

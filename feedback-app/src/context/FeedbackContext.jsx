@@ -1,25 +1,11 @@
-import {createContext, useState} from 'react'
+import {createContext, useState, useEffect} from 'react'
 import FeedbackData from '../data/FeedbackData'
 
 const FeedbackContext = createContext()
 
 export const FeedbackProvider = ({children}) => {
-    const [feedback, setFeedback] = useState(
-        [
-            ...FeedbackData,
-            {
-                id: 3,
-                text: 'This is item from context',
-                rating: 2
-            },
-            {
-                id: 4,
-                text: 'This is second item from context',
-                rating: 6
-            },
-        ]
-    )
-
+    const [feedback, setFeedback] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
     const [feedbackEdit, setfeedbackEdit] = useState({
         item: {},
         edit: false
@@ -32,6 +18,18 @@ export const FeedbackProvider = ({children}) => {
                     edit: true
                 }
         )
+    }
+    useEffect(() => {
+        fetchFeedback()
+    }, [])
+
+    // fetch data from backend
+    const fetchFeedback = async () => {
+        const response = await fetch(`http://localhost:5000/feedback?_sort=id&order=desc`)
+        const data = await response.json()
+
+        setFeedback(data)
+        setIsLoading(false)
     }
 
     const updateFeedback = ( id, updateItem) => {
@@ -55,6 +53,7 @@ export const FeedbackProvider = ({children}) => {
     value={{
         feedback,
         feedbackEdit,
+        isLoading,
         editFeedback,
         handleDelete,
         addFeedback,

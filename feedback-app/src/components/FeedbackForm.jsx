@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from "react"
 import FeedbackContext from "../context/FeedbackContext"
 import Card from "./shared/Card"
 import RatingSelect from "./RatingSelect"
-import Button from "./Button"
+import Button from "./shared/Button"
 
 function FeedbackForm() {
     const {addFeedback, feedbackEdit, updateFeedback} = useContext(FeedbackContext)

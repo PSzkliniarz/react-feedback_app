@@ -25,7 +25,7 @@ export const FeedbackProvider = ({children}) => {
 
     // fetch data from backend
     const fetchFeedback = async () => {
-        const response = await fetch(`http://localhost:5000/feedback?_sort=id&order=desc`)
+        const response = await fetch(`/feedback?_sort=id&order=desc`)
         const data = await response.json()
 
         setFeedback(data)
@@ -43,10 +43,18 @@ export const FeedbackProvider = ({children}) => {
         }
     }
 
-    const addFeedback = (newFeedback) => {
-        let maxId = Math.max(...feedback.map( (item) => (item.id)))
-        newFeedback.id = maxId + 1
-        setFeedback([newFeedback, ...feedback])
+    const addFeedback = async (newFeedback) => {
+        const response = await fetch('/feedback', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newFeedback)
+            })
+
+        const data = await response.json()
+
+        setFeedback([data, ...feedback])
     }
 
     return <FeedbackContext.Provider 

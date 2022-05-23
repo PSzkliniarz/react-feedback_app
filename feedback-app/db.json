@@ -24,6 +24,11 @@
       "rating": "3",
       "text": "This is second feedback from postman",
       "id": 5
+    },
+    {
+      "text": "First opinion from frontend to backend",
+      "rating": 10,
+      "id": 6
     }
   ]
 }
